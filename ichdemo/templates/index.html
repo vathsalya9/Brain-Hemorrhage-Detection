@@ -1,0 +1,70 @@
+
+{% extends "base.html" %}
+{% block content %}
+{% if max %}
+<div class="w3-content w3-container w3-padding-64" id="portfolio">
+  <h3 class="w3-center">FILE DATA</h3>
+   <div class="w3-row">
+    <div class="w3-col m6 w3-center w3-padding-large">
+      <p><b><i class="fa fa-arrow-circle-o-down w3-margin-right"></i>Raw Scan</b></p><br>
+      <img src={{url}} class="w3-round w3-image w3-opacity w3-hover-opacity-off" alt="Raw Brain Scan" width="500" height="500">
+    </div>
+
+    <!-- Hide this text on small devices -->
+    <div class="w3-col m6 w3-hide-small w3-padding-large">
+    <p><b><i class="fa fa-arrow-circle-o-right w3-margin-right"></i>Meta Data</b></p><br>
+    <ul class="w3-ul w3-hoverable">
+     {% for meta in metadata %}
+     <li><b>{{meta.name}}:</b>   {{meta.value}}</li>
+     {% endfor %}
+    </ul>
+    </div>
+  </div>
+  <br>
+  <br>
+
+  <h3 class="w3-center">WINDOWING</h3>  
+  <p class="w3-center"><em>The following is the preprocessed data. Click on the images to make them bigger.</em></p><br>
+
+  <!-- Responsive Grid. Four columns on tablets, laptops and desktops. Will stack on mobile devices/small screens (100% width) -->
+  <div class="w3-row-padding w3-center">
+    {% for window in windowing %}
+    <div class="w3-col m4">
+      <img src={{window.url}} style="width:100%" onclick="onClick(this)" class="w3-hover-opacity">
+    </div>
+    {% endfor %}
+  </div>
+  <br>
+  <br>
+  <br>
+
+
+  <h3 class="w3-center">DIAGNOSIS</h3>
+  <p class="w3-center"><em> Multi-class classification is shown in percentages</em></p>
+  <p class="w3-large w3-center w3-padding-16">Hemorrhage Type:</p>
+  <p class="w3-wide">Epidural</p>
+  <div class="w3-light-grey">
+    <div class="w3-container w3-padding-small w3-dark-grey w3-center" style="width:calc({{prediction[0][0]}}*100%)">{{prediction[0][0]}}</div>
+  </div>
+  <p class="w3-wide">Intraparenchymal</p>
+  <div class="w3-light-grey">
+    <div class="w3-container w3-padding-small w3-dark-grey w3-center" style="width:calc({{prediction[0][1]}}*100%)">{{prediction[0][1]}}</div>
+  </div>
+  <p class="w3-wide">Intraventricular</p>
+  <div class="w3-light-grey">
+    <div class="w3-container w3-padding-small w3-dark-grey w3-center" style="width:calc({{prediction[0][2]}}*100%)">{{prediction[0][2]}}</div>
+  </div>
+    <p class="w3-wide">Subarachnoid</p>
+  <div class="w3-light-grey">
+    <div class="w3-container w3-padding-small w3-dark-grey w3-center" style="width:calc({{prediction[0][3]}}*100%)">{{prediction[0][3]}}</div>
+  </div>
+  <p class="w3-wide">Subdural</p>
+  <div class="w3-light-grey">
+    <div class="w3-container w3-padding-small w3-dark-grey w3-center" style="width:calc({{prediction[0][4]}}*100%)">{{prediction[0][4]}}</div>
+  </div>
+</div>  
+
+{% else %}
+<center><h4> </h4>
+{% endif %}
+{% endblock %}
