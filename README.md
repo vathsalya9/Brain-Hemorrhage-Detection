@@ -1,4 +1,4 @@
-# 🧠 Intracranial Hemorrhage Detection using Deep Learning 
+# Intracranial Hemorrhage Detection using Deep Learning 
 
 In this project we detect and diagnose the type of hemorrhage in CT scans using Deep Learning!
 
